@@ -1,19 +1,22 @@
 package net.java.cargotracker.domain.model.cargo;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import net.java.cargotracker.interfaces.booking.facade.BookingServiceFacade;
+import net.java.cargotracker.interfaces.booking.facade.dto.Location;
+import org.glassfish.jersey.process.internal.RequestContext;
+import org.primefaces.PrimeFaces;
+
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.flow.FlowScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 import static net.java.cargotracker.application.util.DateUtil.computeDuration;
-import net.java.cargotracker.interfaces.booking.facade.dto.Location;
-import net.java.cargotracker.interfaces.booking.facade.BookingServiceFacade;
-import org.primefaces.context.RequestContext;
 
 /**
  *
@@ -165,8 +168,10 @@ public class BookingBackingBean implements Serializable{
         } else {
             bookable = false;
         }
-        RequestContext.getCurrentInstance().update("dateForm:durationPanel");
-        RequestContext.getCurrentInstance().update("dateForm:bookBtn");
+//        RequestContext.getCurrentInstance().update("dateForm:durationPanel");
+        PrimeFaces.current().ajax().update("dateForm:durationPanel");
+//        RequestContext.getCurrentInstance().update("dateForm:bookBtn");
+        PrimeFaces.current().ajax().update("dateForm:bookBtn");
     }
 
 }

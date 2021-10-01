@@ -22,7 +22,7 @@ import net.java.cargotracker.interfaces.booking.facade.BookingServiceFacade;
 import net.java.cargotracker.interfaces.booking.facade.dto.CargoRoute;
 import net.java.cargotracker.interfaces.booking.web.CargoDetails;
 import net.java.cargotracker.interfaces.handling.HandlingEventRegistrationAttempt;
-import org.primefaces.context.RequestContext;
+import org.primefaces.PrimeFaces;
 
 /**
  *
@@ -186,7 +186,8 @@ public class EventBackingBean implements Serializable {
                 loadEventCondition = true;
             }
             voyageSelectable = true;
-            RequestContext.getCurrentInstance().update("firstForm:panelVoyage");
+//            RequestContext.getCurrentInstance().update("firstForm:panelVoyage");
+            PrimeFaces.current().ajax().update("firstForm:panelVoyage");
         } else {
             this.voyageNumber = null;
             loadEventCondition = true;
@@ -201,7 +202,8 @@ public class EventBackingBean implements Serializable {
         if (trackId != null && eventType != null && location != null && (eventType != null && loadEventCondition)) {
             // All condition are Ok, Next screen button can be enable
             inputsOk = true;
-            RequestContext.getCurrentInstance().update("firstForm:panelVoyage,:firstScreen:nextBtn");
+//            RequestContext.getCurrentInstance().update("firstForm:panelVoyage,:firstScreen:nextBtn");
+            PrimeFaces.current().ajax().update("firstForm:panelVoyage,:firstScreen:nextBtn");
 
         } else {
             // All conditions are not OK!
